@@ -1,0 +1,450 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		72299B2414D31CB10055DCB6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72299B2314D31CB10055DCB6 /* Cocoa.framework */; };
+		72299B2E14D31CB10055DCB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72299B2C14D31CB10055DCB6 /* InfoPlist.strings */; };
+		72299B3014D31CB10055DCB6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72299B2F14D31CB10055DCB6 /* main.m */; };
+		72299B3414D31CB10055DCB6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 72299B3214D31CB10055DCB6 /* Credits.rtf */; };
+		72299B3714D31CB10055DCB6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72299B3614D31CB10055DCB6 /* AppDelegate.m */; };
+		72299B3A14D31CB10055DCB6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72299B3814D31CB10055DCB6 /* MainMenu.xib */; };
+		72299B4214D31CB10055DCB6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72299B4114D31CB10055DCB6 /* SenTestingKit.framework */; };
+		72299B4314D31CB10055DCB6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72299B2314D31CB10055DCB6 /* Cocoa.framework */; };
+		72299B4B14D31CB20055DCB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72299B4914D31CB20055DCB6 /* InfoPlist.strings */; };
+		72299B4E14D31CB20055DCB6 /* MultiMeterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		72299B4414D31CB10055DCB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72299B1614D31CB00055DCB6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72299B1E14D31CB10055DCB6;
+			remoteInfo = MultiMeter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		72299B1F14D31CB10055DCB6 /* MultiMeter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiMeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72299B2314D31CB10055DCB6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		72299B2614D31CB10055DCB6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		72299B2714D31CB10055DCB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		72299B2814D31CB10055DCB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		72299B2B14D31CB10055DCB6 /* MultiMeter-Info.plist */ = {isa = PBXFileReference; path = "MultiMeter-Info.plist"; sourceTree = "<group>"; };
+		72299B2D14D31CB10055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		72299B2F14D31CB10055DCB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72299B3114D31CB10055DCB6 /* MultiMeter-Prefix.pch */ = {isa = PBXFileReference; path = "MultiMeter-Prefix.pch"; sourceTree = "<group>"; };
+		72299B3314D31CB10055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		72299B3514D31CB10055DCB6 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		72299B3614D31CB10055DCB6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		72299B3914D31CB10055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		72299B4014D31CB10055DCB6 /* MultiMeterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiMeterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72299B4114D31CB10055DCB6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		72299B4814D31CB10055DCB6 /* MultiMeterTests-Info.plist */ = {isa = PBXFileReference; path = "MultiMeterTests-Info.plist"; sourceTree = "<group>"; };
+		72299B4A14D31CB20055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		72299B4C14D31CB20055DCB6 /* MultiMeterTests.h */ = {isa = PBXFileReference; path = MultiMeterTests.h; sourceTree = "<group>"; };
+		72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeterTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		72299B1C14D31CB10055DCB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72299B2414D31CB10055DCB6 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72299B3C14D31CB10055DCB6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72299B4214D31CB10055DCB6 /* SenTestingKit.framework in Frameworks */,
+				72299B4314D31CB10055DCB6 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		72299B1414D31CB00055DCB6 = {
+			isa = PBXGroup;
+			children = (
+				72299B2914D31CB10055DCB6 /* MultiMeter */,
+				72299B4614D31CB10055DCB6 /* MultiMeterTests */,
+				72299B2214D31CB10055DCB6 /* Frameworks */,
+				72299B2014D31CB10055DCB6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		72299B2014D31CB10055DCB6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				72299B1F14D31CB10055DCB6 /* MultiMeter.app */,
+				72299B4014D31CB10055DCB6 /* MultiMeterTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72299B2214D31CB10055DCB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				72299B2314D31CB10055DCB6 /* Cocoa.framework */,
+				72299B4114D31CB10055DCB6 /* SenTestingKit.framework */,
+				72299B2514D31CB10055DCB6 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		72299B2514D31CB10055DCB6 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				72299B2614D31CB10055DCB6 /* AppKit.framework */,
+				72299B2714D31CB10055DCB6 /* CoreData.framework */,
+				72299B2814D31CB10055DCB6 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		72299B2914D31CB10055DCB6 /* MultiMeter */ = {
+			isa = PBXGroup;
+			children = (
+				72299B3514D31CB10055DCB6 /* AppDelegate.h */,
+				72299B3614D31CB10055DCB6 /* AppDelegate.m */,
+				72299B3814D31CB10055DCB6 /* MainMenu.xib */,
+				72299B2A14D31CB10055DCB6 /* Supporting Files */,
+			);
+			path = MultiMeter;
+			sourceTree = "<group>";
+		};
+		72299B2A14D31CB10055DCB6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				72299B2B14D31CB10055DCB6 /* MultiMeter-Info.plist */,
+				72299B2C14D31CB10055DCB6 /* InfoPlist.strings */,
+				72299B2F14D31CB10055DCB6 /* main.m */,
+				72299B3114D31CB10055DCB6 /* MultiMeter-Prefix.pch */,
+				72299B3214D31CB10055DCB6 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		72299B4614D31CB10055DCB6 /* MultiMeterTests */ = {
+			isa = PBXGroup;
+			children = (
+				72299B4C14D31CB20055DCB6 /* MultiMeterTests.h */,
+				72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */,
+				72299B4714D31CB10055DCB6 /* Supporting Files */,
+			);
+			path = MultiMeterTests;
+			sourceTree = "<group>";
+		};
+		72299B4714D31CB10055DCB6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				72299B4814D31CB10055DCB6 /* MultiMeterTests-Info.plist */,
+				72299B4914D31CB20055DCB6 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		72299B1E14D31CB10055DCB6 /* MultiMeter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72299B5114D31CB20055DCB6 /* Build configuration list for PBXNativeTarget "MultiMeter" */;
+			buildPhases = (
+				72299B1B14D31CB10055DCB6 /* Sources */,
+				72299B1C14D31CB10055DCB6 /* Frameworks */,
+				72299B1D14D31CB10055DCB6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MultiMeter;
+			productName = MultiMeter;
+			productReference = 72299B1F14D31CB10055DCB6 /* MultiMeter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		72299B3F14D31CB10055DCB6 /* MultiMeterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72299B5414D31CB20055DCB6 /* Build configuration list for PBXNativeTarget "MultiMeterTests" */;
+			buildPhases = (
+				72299B3B14D31CB10055DCB6 /* Sources */,
+				72299B3C14D31CB10055DCB6 /* Frameworks */,
+				72299B3D14D31CB10055DCB6 /* Resources */,
+				72299B3E14D31CB10055DCB6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				72299B4514D31CB10055DCB6 /* PBXTargetDependency */,
+			);
+			name = MultiMeterTests;
+			productName = MultiMeterTests;
+			productReference = 72299B4014D31CB10055DCB6 /* MultiMeterTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		72299B1614D31CB00055DCB6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 72299B1914D31CB00055DCB6 /* Build configuration list for PBXProject "MultiMeter" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 72299B1414D31CB00055DCB6;
+			productRefGroup = 72299B2014D31CB10055DCB6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				72299B1E14D31CB10055DCB6 /* MultiMeter */,
+				72299B3F14D31CB10055DCB6 /* MultiMeterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		72299B1D14D31CB10055DCB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72299B2E14D31CB10055DCB6 /* InfoPlist.strings in Resources */,
+				72299B3414D31CB10055DCB6 /* Credits.rtf in Resources */,
+				72299B3A14D31CB10055DCB6 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72299B3D14D31CB10055DCB6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72299B4B14D31CB20055DCB6 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		72299B3E14D31CB10055DCB6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		72299B1B14D31CB10055DCB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72299B3014D31CB10055DCB6 /* main.m in Sources */,
+				72299B3714D31CB10055DCB6 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72299B3B14D31CB10055DCB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72299B4E14D31CB20055DCB6 /* MultiMeterTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72299B4514D31CB10055DCB6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 72299B1E14D31CB10055DCB6 /* MultiMeter */;
+			targetProxy = 72299B4414D31CB10055DCB6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		72299B2C14D31CB10055DCB6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72299B2D14D31CB10055DCB6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		72299B3214D31CB10055DCB6 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72299B3314D31CB10055DCB6 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		72299B3814D31CB10055DCB6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72299B3914D31CB10055DCB6 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		72299B4914D31CB20055DCB6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72299B4A14D31CB20055DCB6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		72299B4F14D31CB20055DCB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		72299B5014D31CB20055DCB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		72299B5214D31CB20055DCB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MultiMeter/MultiMeter-Prefix.pch";
+				INFOPLIST_FILE = "MultiMeter/MultiMeter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		72299B5314D31CB20055DCB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MultiMeter/MultiMeter-Prefix.pch";
+				INFOPLIST_FILE = "MultiMeter/MultiMeter-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		72299B5514D31CB20055DCB6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MultiMeter.app/Contents/MacOS/MultiMeter";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MultiMeter/MultiMeter-Prefix.pch";
+				INFOPLIST_FILE = "MultiMeterTests/MultiMeterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		72299B5614D31CB20055DCB6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MultiMeter.app/Contents/MacOS/MultiMeter";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MultiMeter/MultiMeter-Prefix.pch";
+				INFOPLIST_FILE = "MultiMeterTests/MultiMeterTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		72299B1914D31CB00055DCB6 /* Build configuration list for PBXProject "MultiMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72299B4F14D31CB20055DCB6 /* Debug */,
+				72299B5014D31CB20055DCB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72299B5114D31CB20055DCB6 /* Build configuration list for PBXNativeTarget "MultiMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72299B5214D31CB20055DCB6 /* Debug */,
+				72299B5314D31CB20055DCB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		72299B5414D31CB20055DCB6 /* Build configuration list for PBXNativeTarget "MultiMeterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72299B5514D31CB20055DCB6 /* Debug */,
+				72299B5614D31CB20055DCB6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 72299B1614D31CB00055DCB6 /* Project object */;
+}
