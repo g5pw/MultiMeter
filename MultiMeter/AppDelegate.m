@@ -11,10 +11,14 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize measurement = _measurement;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
 }
 
+- (IBAction)quitButtonPressed:(id)sender {
+    
+}
 @end

@@ -17,6 +17,10 @@
 		72299B4314D31CB10055DCB6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72299B2314D31CB10055DCB6 /* Cocoa.framework */; };
 		72299B4B14D31CB20055DCB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72299B4914D31CB20055DCB6 /* InfoPlist.strings */; };
 		72299B4E14D31CB20055DCB6 /* MultiMeterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */; };
+		723DCC4C14DEBDB600C8C059 /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4214DEBDB600C8C059 /* AMSerialPort.m */; };
+		723DCC4D14DEBDB600C8C059 /* AMSerialPortAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4414DEBDB600C8C059 /* AMSerialPortAdditions.m */; };
+		723DCC4F14DEBDB600C8C059 /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4814DEBDB600C8C059 /* AMSerialPortList.m */; };
+		723DCC5014DEBDB600C8C059 /* AMStandardEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4A14DEBDB600C8C059 /* AMStandardEnumerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +39,29 @@
 		72299B2614D31CB10055DCB6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		72299B2714D31CB10055DCB6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		72299B2814D31CB10055DCB6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		72299B2B14D31CB10055DCB6 /* MultiMeter-Info.plist */ = {isa = PBXFileReference; path = "MultiMeter-Info.plist"; sourceTree = "<group>"; };
+		72299B2B14D31CB10055DCB6 /* MultiMeter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MultiMeter-Info.plist"; sourceTree = "<group>"; };
 		72299B2D14D31CB10055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		72299B2F14D31CB10055DCB6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		72299B3114D31CB10055DCB6 /* MultiMeter-Prefix.pch */ = {isa = PBXFileReference; path = "MultiMeter-Prefix.pch"; sourceTree = "<group>"; };
+		72299B3114D31CB10055DCB6 /* MultiMeter-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MultiMeter-Prefix.pch"; sourceTree = "<group>"; };
 		72299B3314D31CB10055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		72299B3514D31CB10055DCB6 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		72299B3514D31CB10055DCB6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72299B3614D31CB10055DCB6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		72299B3914D31CB10055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		72299B4014D31CB10055DCB6 /* MultiMeterTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiMeterTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72299B4114D31CB10055DCB6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		72299B4814D31CB10055DCB6 /* MultiMeterTests-Info.plist */ = {isa = PBXFileReference; path = "MultiMeterTests-Info.plist"; sourceTree = "<group>"; };
+		72299B4814D31CB10055DCB6 /* MultiMeterTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MultiMeterTests-Info.plist"; sourceTree = "<group>"; };
 		72299B4A14D31CB20055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		72299B4C14D31CB20055DCB6 /* MultiMeterTests.h */ = {isa = PBXFileReference; path = MultiMeterTests.h; sourceTree = "<group>"; };
+		72299B4C14D31CB20055DCB6 /* MultiMeterTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiMeterTests.h; sourceTree = "<group>"; };
 		72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeterTests.m; sourceTree = "<group>"; };
+		723DCC3E14DEBDB600C8C059 /* AMSerialErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialErrors.h; sourceTree = "<group>"; };
+		723DCC4114DEBDB600C8C059 /* AMSerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPort.h; sourceTree = "<group>"; };
+		723DCC4214DEBDB600C8C059 /* AMSerialPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPort.m; sourceTree = "<group>"; };
+		723DCC4314DEBDB600C8C059 /* AMSerialPortAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPortAdditions.h; sourceTree = "<group>"; };
+		723DCC4414DEBDB600C8C059 /* AMSerialPortAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortAdditions.m; sourceTree = "<group>"; };
+		723DCC4714DEBDB600C8C059 /* AMSerialPortList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPortList.h; sourceTree = "<group>"; };
+		723DCC4814DEBDB600C8C059 /* AMSerialPortList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList.m; sourceTree = "<group>"; };
+		723DCC4914DEBDB600C8C059 /* AMStandardEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardEnumerator.h; sourceTree = "<group>"; };
+		723DCC4A14DEBDB600C8C059 /* AMStandardEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardEnumerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +127,7 @@
 		72299B2914D31CB10055DCB6 /* MultiMeter */ = {
 			isa = PBXGroup;
 			children = (
+				723DCC5214DEBDC100C8C059 /* AMSerialPort */,
 				72299B3514D31CB10055DCB6 /* AppDelegate.h */,
 				72299B3614D31CB10055DCB6 /* AppDelegate.m */,
 				72299B3814D31CB10055DCB6 /* MainMenu.xib */,
@@ -151,6 +165,22 @@
 				72299B4914D31CB20055DCB6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		723DCC5214DEBDC100C8C059 /* AMSerialPort */ = {
+			isa = PBXGroup;
+			children = (
+				723DCC3E14DEBDB600C8C059 /* AMSerialErrors.h */,
+				723DCC4114DEBDB600C8C059 /* AMSerialPort.h */,
+				723DCC4214DEBDB600C8C059 /* AMSerialPort.m */,
+				723DCC4314DEBDB600C8C059 /* AMSerialPortAdditions.h */,
+				723DCC4414DEBDB600C8C059 /* AMSerialPortAdditions.m */,
+				723DCC4714DEBDB600C8C059 /* AMSerialPortList.h */,
+				723DCC4814DEBDB600C8C059 /* AMSerialPortList.m */,
+				723DCC4914DEBDB600C8C059 /* AMStandardEnumerator.h */,
+				723DCC4A14DEBDB600C8C059 /* AMStandardEnumerator.m */,
+			);
+			name = AMSerialPort;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +292,10 @@
 			files = (
 				72299B3014D31CB10055DCB6 /* main.m in Sources */,
 				72299B3714D31CB10055DCB6 /* AppDelegate.m in Sources */,
+				723DCC4C14DEBDB600C8C059 /* AMSerialPort.m in Sources */,
+				723DCC4D14DEBDB600C8C059 /* AMSerialPortAdditions.m in Sources */,
+				723DCC4F14DEBDB600C8C059 /* AMSerialPortList.m in Sources */,
+				723DCC5014DEBDB600C8C059 /* AMStandardEnumerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +469,7 @@
 				72299B5314D31CB20055DCB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		72299B5414D31CB20055DCB6 /* Build configuration list for PBXNativeTarget "MultiMeterTests" */ = {
 			isa = XCConfigurationList;
@@ -443,6 +478,7 @@
 				72299B5614D31CB20055DCB6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
