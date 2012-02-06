@@ -10,8 +10,10 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@property (weak) IBOutlet NSPopUpButton *portChooser;
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTextFieldCell *measurement;
 - (IBAction)quitButtonPressed:(id)sender;
+- (IBAction)portChooserPressed:(id)sender;
 
 @end
