@@ -17,10 +17,8 @@
 		72299B4314D31CB10055DCB6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72299B2314D31CB10055DCB6 /* Cocoa.framework */; };
 		72299B4B14D31CB20055DCB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72299B4914D31CB20055DCB6 /* InfoPlist.strings */; };
 		72299B4E14D31CB20055DCB6 /* MultiMeterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */; };
-		723DCC4C14DEBDB600C8C059 /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4214DEBDB600C8C059 /* AMSerialPort.m */; };
-		723DCC4D14DEBDB600C8C059 /* AMSerialPortAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4414DEBDB600C8C059 /* AMSerialPortAdditions.m */; };
-		723DCC4F14DEBDB600C8C059 /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4814DEBDB600C8C059 /* AMSerialPortList.m */; };
-		723DCC5014DEBDB600C8C059 /* AMStandardEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC4A14DEBDB600C8C059 /* AMStandardEnumerator.m */; };
+		723DCC5514DEC95600C8C059 /* SerialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC5414DEC95600C8C059 /* SerialManager.m */; };
+		7244B05414E079CA001869A8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7244B05314E079CA001869A8 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,15 +51,9 @@
 		72299B4A14D31CB20055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		72299B4C14D31CB20055DCB6 /* MultiMeterTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiMeterTests.h; sourceTree = "<group>"; };
 		72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeterTests.m; sourceTree = "<group>"; };
-		723DCC3E14DEBDB600C8C059 /* AMSerialErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialErrors.h; sourceTree = "<group>"; };
-		723DCC4114DEBDB600C8C059 /* AMSerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPort.h; sourceTree = "<group>"; };
-		723DCC4214DEBDB600C8C059 /* AMSerialPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPort.m; sourceTree = "<group>"; };
-		723DCC4314DEBDB600C8C059 /* AMSerialPortAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPortAdditions.h; sourceTree = "<group>"; };
-		723DCC4414DEBDB600C8C059 /* AMSerialPortAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortAdditions.m; sourceTree = "<group>"; };
-		723DCC4714DEBDB600C8C059 /* AMSerialPortList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPortList.h; sourceTree = "<group>"; };
-		723DCC4814DEBDB600C8C059 /* AMSerialPortList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList.m; sourceTree = "<group>"; };
-		723DCC4914DEBDB600C8C059 /* AMStandardEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardEnumerator.h; sourceTree = "<group>"; };
-		723DCC4A14DEBDB600C8C059 /* AMStandardEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardEnumerator.m; sourceTree = "<group>"; };
+		723DCC5314DEC95600C8C059 /* SerialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialManager.h; sourceTree = "<group>"; };
+		723DCC5414DEC95600C8C059 /* SerialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerialManager.m; sourceTree = "<group>"; };
+		7244B05314E079CA001869A8 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../../System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72299B2414D31CB10055DCB6 /* Cocoa.framework in Frameworks */,
+				7244B05414E079CA001869A8 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +100,7 @@
 		72299B2214D31CB10055DCB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7244B05314E079CA001869A8 /* IOKit.framework */,
 				72299B2314D31CB10055DCB6 /* Cocoa.framework */,
 				72299B4114D31CB10055DCB6 /* SenTestingKit.framework */,
 				72299B2514D31CB10055DCB6 /* Other Frameworks */,
@@ -127,7 +121,8 @@
 		72299B2914D31CB10055DCB6 /* MultiMeter */ = {
 			isa = PBXGroup;
 			children = (
-				723DCC5214DEBDC100C8C059 /* AMSerialPort */,
+				723DCC5314DEC95600C8C059 /* SerialManager.h */,
+				723DCC5414DEC95600C8C059 /* SerialManager.m */,
 				72299B3514D31CB10055DCB6 /* AppDelegate.h */,
 				72299B3614D31CB10055DCB6 /* AppDelegate.m */,
 				72299B3814D31CB10055DCB6 /* MainMenu.xib */,
@@ -165,22 +160,6 @@
 				72299B4914D31CB20055DCB6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		723DCC5214DEBDC100C8C059 /* AMSerialPort */ = {
-			isa = PBXGroup;
-			children = (
-				723DCC3E14DEBDB600C8C059 /* AMSerialErrors.h */,
-				723DCC4114DEBDB600C8C059 /* AMSerialPort.h */,
-				723DCC4214DEBDB600C8C059 /* AMSerialPort.m */,
-				723DCC4314DEBDB600C8C059 /* AMSerialPortAdditions.h */,
-				723DCC4414DEBDB600C8C059 /* AMSerialPortAdditions.m */,
-				723DCC4714DEBDB600C8C059 /* AMSerialPortList.h */,
-				723DCC4814DEBDB600C8C059 /* AMSerialPortList.m */,
-				723DCC4914DEBDB600C8C059 /* AMStandardEnumerator.h */,
-				723DCC4A14DEBDB600C8C059 /* AMStandardEnumerator.m */,
-			);
-			name = AMSerialPort;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,10 +271,7 @@
 			files = (
 				72299B3014D31CB10055DCB6 /* main.m in Sources */,
 				72299B3714D31CB10055DCB6 /* AppDelegate.m in Sources */,
-				723DCC4C14DEBDB600C8C059 /* AMSerialPort.m in Sources */,
-				723DCC4D14DEBDB600C8C059 /* AMSerialPortAdditions.m in Sources */,
-				723DCC4F14DEBDB600C8C059 /* AMSerialPortList.m in Sources */,
-				723DCC5014DEBDB600C8C059 /* AMStandardEnumerator.m in Sources */,
+				723DCC5514DEC95600C8C059 /* SerialManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +379,10 @@
 		72299B5214D31CB20055DCB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultiMeter/MultiMeter-Prefix.pch";
 				INFOPLIST_FILE = "MultiMeter/MultiMeter-Info.plist";
@@ -414,6 +394,10 @@
 		72299B5314D31CB20055DCB6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MultiMeter/MultiMeter-Prefix.pch";
 				INFOPLIST_FILE = "MultiMeter/MultiMeter-Info.plist";
