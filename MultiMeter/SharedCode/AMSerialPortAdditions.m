@@ -2,7 +2,7 @@
 //  AMSerialPortAdditions.m
 //
 //  Created by Andreas on Thu May 02 2002.
-//  Copyright (c) 2001-2011 Andreas Mayer. All rights reserved.
+//  Copyright (c) 2001-2009 Andreas Mayer. All rights reserved.
 //
 //  2002-07-02 Andreas Mayer
 //	- initialize buffer in readString
@@ -27,10 +27,6 @@
 //  2009-05-08 Sean McBride
 //  - added writeBytes:length:error: method
 //  - associated a name with created threads (for debugging, 10.6 only)
-//  2010-01-04 Sean McBride
-//  - fixed some memory management issues
-//  - the timeout feature (for reading) was broken, now fixed
-//  - don't rely on system clock for measuring elapsed time (because the user can change the clock)
 
 
 #import "AMSDKCompatibility.h"
@@ -77,7 +73,7 @@
 		res = select(fileDescriptor+1, readfds, nil, nil, &timeout);
 		if (res >= 1) {
 			NSString *readStr = [self readStringUsingEncoding:NSUTF8StringEncoding error:NULL];
-			[[self am_readTarget] performSelector:am_readSelector withObject:readStr];
+			[[self am_readTarget] performSelector:@selector(am_readSelector) withObject:readStr];
 			[self am_setReadTarget:nil];
 		} else {
 			[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(doRead:) userInfo:self repeats:NO];
@@ -123,7 +119,7 @@
 	NSString *result = nil;
 	NSData *data = [self readAndStopAfterBytes:NO bytes:0 stopAtChar:NO stopChar:0 error:error];
 	if (data) {
-		result = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
+		result = [[NSString alloc] initWithData:data encoding:encoding];
 	}
 	return result;
 }
@@ -133,7 +129,7 @@
 	NSString *result = nil;
 	NSData *data = [self readAndStopAfterBytes:YES bytes:bytes stopAtChar:NO stopChar:0 error:error];
 	if (data) {
-		result = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
+		result = [[NSString alloc] initWithData:data encoding:encoding];
 	}
 	return result;
 }
@@ -144,7 +140,7 @@
 	NSString *result = nil;
 	NSData *data = [self readAndStopAfterBytes:NO bytes:0 stopAtChar:YES stopChar:stopChar error:error];
 	if (data) {
-		result = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
+		result = [[NSString alloc] initWithData:data encoding:encoding];
 	}
 	return result;
 }
@@ -154,7 +150,7 @@
 	NSString *result = nil;
 	NSData *data = [self readAndStopAfterBytes:YES bytes:bytes stopAtChar:YES stopChar:stopChar error:error];
 	if (data) {
-		result = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
+		result = [[NSString alloc] initWithData:data encoding:encoding];
 	}
 	return result;
 }
@@ -188,7 +184,7 @@
 	if (error) {
 		NSDictionary *userInfo = nil;
 		if (bytesWritten > 0) {
-			NSNumber* bytesWrittenNum = [NSNumber numberWithLongLong:bytesWritten];
+			NSNumber* bytesWrittenNum = [NSNumber numberWithUnsignedLongLong:bytesWritten];
 			userInfo = [NSDictionary dictionaryWithObject:bytesWrittenNum forKey:@"bytesWritten"];
 		}
 		*error = [NSError errorWithDomain:AMSerialErrorDomain code:errorCode userInfo:userInfo];
@@ -296,16 +292,6 @@
 
 #pragma mark -
 
-static int64_t AMMicrosecondsSinceBoot (void)
-{
-	AbsoluteTime uptime1 = UpTime();
-	Nanoseconds uptime2 = AbsoluteToNanoseconds(uptime1);
-	uint64_t uptime3 = (((uint64_t)uptime2.hi) << 32) + (uint64_t)uptime2.lo;
-	uint64_t uptime4 = uptime3 / NSEC_PER_USEC;
-	
-	return (int64_t)uptime4;
-}
-
 @implementation AMSerialPort (AMSerialPortAdditionsPrivate)
 
 // ============================================================
@@ -329,7 +315,6 @@ static int64_t AMMicrosecondsSinceBoot (void)
 
 	localBuffer = malloc(AMSER_MAXBUFSIZE);
 	stopReadInBackground = NO;
-	NSAutoreleasePool *localAutoreleasePool = [[NSAutoreleasePool alloc] init];
 	[closeLock lock];
 	if ((fileDescriptor >= 0) && (!stopReadInBackground)) {
 		//NSLog(@"readDataInBackgroundThread - [closeLock lock]");
@@ -347,7 +332,6 @@ static int64_t AMMicrosecondsSinceBoot (void)
 	} else {
 		[closeLock unlock];
 	}
-	[localAutoreleasePool drain];
 	free(localReadFDs);
 	free(localBuffer);
 
@@ -401,7 +385,7 @@ static int64_t AMMicrosecondsSinceBoot (void)
 #endif
 		[delegate performSelectorOnMainThread:@selector(serialPortReadData:) withObject:[NSDictionary dictionaryWithObjectsAndKeys: self, @"serialPort", data, @"data", nil] waitUntilDone:NO];
 		free(localReadFDs);
-		[localAutoreleasePool drain];
+		[localAutoreleasePool release];
 	} else {
 #ifdef AMSerialDebug
 		NSLog(@"read stopped: %@", [NSThread currentThread]);
@@ -439,10 +423,7 @@ static int64_t AMMicrosecondsSinceBoot (void)
 	long speed;
 	long estimatedTime;
 	BOOL error = NO;
-	
-	NSAutoreleasePool *localAutoreleasePool = [[NSAutoreleasePool alloc] init];
 
-	[data retain];
 	localBuffer = malloc(AMSER_MAXBUFSIZE);
 	stopWriteInBackground = NO;
 	[writeLock lock];	// write in sequence
@@ -483,8 +464,6 @@ static int64_t AMMicrosecondsSinceBoot (void)
 	countWriteInBackgroundThreads--;
 	
 	free(localBuffer);
-	[data release];
-	[localAutoreleasePool drain];
 }
 
 - (id)am_readTarget
@@ -495,8 +474,6 @@ static int64_t AMMicrosecondsSinceBoot (void)
 - (void)am_setReadTarget:(id)newReadTarget
 {
 	if (am_readTarget != newReadTarget) {
-		[newReadTarget retain];
-		[am_readTarget release];
 		am_readTarget = newReadTarget;
 	}
 }
@@ -520,34 +497,37 @@ static int64_t AMMicrosecondsSinceBoot (void)
 	int endCode = kAMSerialEndOfStream;
 	NSError *underlyingError = nil;
 	
-	// How long, in total, in microseconds, do we block before timing out?
-	int64_t totalTimeout = (int64_t)([self readTimeout] * 1000000.0);
-	
-	// This value will be decreased each time through the loop
-	int64_t remainingTimeout = totalTimeout;
-	
 	// Note the time that we start
-	int64_t startTime = AMMicrosecondsSinceBoot();
+	NSDate *startTime = [NSDate date];
+	
+	// How long, in total, do we block before timing out?
+	NSTimeInterval totalTimeout = [self readTimeout];
+
+	// This value will be decreased each time through the loop
+	NSTimeInterval remainingTimeout = totalTimeout;
 	
 	while (YES) {
-		if (remainingTimeout <= 0) {
+		if (remainingTimeout <= 0.0) {
 			errorCode = kAMSerialErrorTimeout;
 			break;
 		} else {
-			// Convert to 'struct timeval'
-			timeout.tv_sec = (__darwin_time_t)(remainingTimeout / 1000000);
-			timeout.tv_usec = (__darwin_suseconds_t)(remainingTimeout - (timeout.tv_sec * 1000000));
+			// Convert from NSTimeInterval to struct timeval
+			double numSecs = trunc(remainingTimeout);
+			double numUSecs = (remainingTimeout-numSecs)*1000000.0;
+			timeout.tv_sec = (time_t)lrint(numSecs);
+			timeout.tv_usec = (suseconds_t)lrint(numUSecs);
 #ifdef AMSerialDebug
-			NSLog(@"timeout remaining: %qd us = %d s and %d us", remainingTimeout, timeout.tv_sec, timeout.tv_usec);
+			NSLog(@"timeout: %fs = %ds and %dus", remainingTimeout, timeout.tv_sec, timeout.tv_usec);
 #endif
 			
-			// If the remaining time is so small that it has rounded to zero, bump it up to 1 microsecond.
+			// If the remaining time is so small that it has rounded to zero, bump it up to 1 microsec.
 			// Why?  Because passing a zeroed timeval to select() indicates that we want to poll, but we don't.
 			if ((timeout.tv_sec == 0) && (timeout.tv_usec == 0)) {
 				timeout.tv_usec = 1;
 			}
 			FD_ZERO(readfds);
 			FD_SET(fileDescriptor, readfds);
+			[self readTimeoutAsTimeval:&timeout];
 			int selectResult = select(fileDescriptor+1, readfds, NULL, NULL, &timeout);
 			if (selectResult == -1) {
 				errorCode = kAMSerialErrorFatal;
@@ -595,13 +575,9 @@ static int64_t AMMicrosecondsSinceBoot (void)
 			}
 			
 			// Reduce the timeout value by the amount of time actually spent so far
-			remainingTimeout -= (AMMicrosecondsSinceBoot() - startTime);
+			remainingTimeout = totalTimeout - [[NSDate date] timeIntervalSinceDate:startTime];
 		}
 	}
-	
-#ifdef AMSerialDebug
-	NSLog(@"timeout remaining at end: %qd us (negative means timeout occured!)", remainingTimeout);
-#endif
 	
 	if (error) {
 		NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];

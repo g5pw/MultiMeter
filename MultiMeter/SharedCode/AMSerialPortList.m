@@ -2,7 +2,7 @@
 //  AMSerialPortList.m
 //
 //  Created by Andreas on 2002-04-24.
-//  Copyright (c) 2001-2010 Andreas Mayer. All rights reserved.
+//  Copyright (c) 2001-2009 Andreas Mayer. All rights reserved.
 //
 //  2002-09-09 Andreas Mayer
 //  - reuse AMSerialPort objects when calling init on an existing AMSerialPortList
@@ -19,8 +19,6 @@
 //  2007-10-26 Sean McBride
 //  - made code 64 bit and garbage collection clean
 //  2008-10-21 Sean McBride
-//  - fixed some memory management issues
-//  2010-01-04 Sean McBride
 //  - fixed some memory management issues
 
 
@@ -52,13 +50,9 @@ NSString *const AMSerialPortListRemovedPorts = @"AMSerialPortListRemovedPorts";
 {
     @synchronized(self) {
         if (AMSerialPortListSingleton == nil) {
-#ifndef __OBJC_GC__
-			[[self alloc] init]; // assignment not done here
-#else
 			// Singleton creation is easy in the GC case, just create it if it hasn't been created yet,
 			// it won't get collected since globals are strongly referenced.
 			AMSerialPortListSingleton = [[self alloc] init]; 
-#endif
        }
     }
     return AMSerialPortListSingleton;
@@ -84,45 +78,24 @@ NSString *const AMSerialPortListRemovedPorts = @"AMSerialPortListRemovedPorts";
 	(void)zone;
     return self;
 }
- 
-- (id)retain
-{
-    return self;
-}
- 
-- (NSUInteger)retainCount
-{
-    return NSUIntegerMax;  //denotes an object that cannot be released
-}
- 
-- (oneway void)release
-{
-    //do nothing
-}
- 
-- (id)autorelease
-{
-    return self;
-}
 
 - (void)dealloc
 {
-	[portList release]; portList = nil;
-	[super dealloc];
+	portList = nil;
 }
 
 #endif
 
 + (NSEnumerator *)portEnumerator
 {
-	return [[[AMStandardEnumerator alloc] initWithCollection:[AMSerialPortList sharedPortList]
-		countSelector:@selector(count) objectAtIndexSelector:@selector(objectAtIndex:)] autorelease];
+	return [[AMStandardEnumerator alloc] initWithCollection:[AMSerialPortList sharedPortList]
+		countSelector:@selector(count) objectAtIndexSelector:@selector(objectAtIndex:)];
 }
 
 + (NSEnumerator *)portEnumeratorForSerialPortsOfType:(NSString *)serialTypeKey
 {
-	return [[[AMStandardEnumerator alloc] initWithCollection:[[AMSerialPortList sharedPortList]
-		serialPortsOfType:serialTypeKey] countSelector:@selector(count) objectAtIndexSelector:@selector(objectAtIndex:)] autorelease];
+	return [[AMStandardEnumerator alloc] initWithCollection:[[AMSerialPortList sharedPortList]
+		serialPortsOfType:serialTypeKey] countSelector:@selector(count) objectAtIndexSelector:@selector(objectAtIndex:)];
 }
 
 - (AMSerialPort *)portByPath:(NSString *)bsdPath
@@ -152,20 +125,14 @@ NSString *const AMSerialPortListRemovedPorts = @"AMSerialPortListRemovedPorts";
 		CFStringRef serviceType = (CFStringRef)IORegistryEntryCreateCFProperty(serialService, CFSTR(kIOSerialBSDTypeKey), kCFAllocatorDefault, 0);
 		if (modemName && bsdPath) {
 			// If the port already exists in the list of ports, we want that one.  We only create a new one as a last resort.
-			serialPort = [self portByPath:(NSString*)bsdPath];
+			serialPort = [self portByPath:(__bridge NSString*)bsdPath];
 			if (serialPort == nil) {
-				serialPort = [[[AMSerialPort alloc] init:(NSString*)bsdPath withName:(NSString*)modemName type:(NSString*)serviceType] autorelease];
+				serialPort = [[AMSerialPort alloc] init:(__bridge NSString*)bsdPath withName:(__bridge NSString*)modemName type:(__bridge NSString*)serviceType];
 			}
 		}
-		if (modemName) {
-			CFRelease(modemName);
-		}
-		if (bsdPath) {
-			CFRelease(bsdPath);
-		}
-		if (serviceType) {
-			CFRelease(serviceType);
-		}
+		CFRelease(modemName);
+		CFRelease(bsdPath);
+		CFRelease(serviceType);
 		
 		// We have sucked this service dry of information so release it now.
 		(void)IOObjectRelease(serialService);
@@ -302,7 +269,7 @@ static void AMSerialPortWasRemovedNotification(void *refcon, io_iterator_t itera
 - (id)init
 {
 	if ((self = [super init])) {
-		portList = [[NSMutableArray array] retain];
+		portList = [NSMutableArray array];
 	
 		[self addAllSerialPortsToArray:portList];
 		[self registerForSerialPortChangeNotifications];
@@ -337,7 +304,7 @@ static void AMSerialPortWasRemovedNotification(void *refcon, io_iterator_t itera
 
 - (NSArray *)serialPorts
 {
-	return [[portList copy] autorelease];
+	return [portList copy];
 }
 
 - (NSArray *)serialPortsOfType:(NSString *)serialTypeKey

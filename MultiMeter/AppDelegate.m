@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "SerialManager.h"
+#import "AMSerialPortList.h"
+#import "AMSerialPort.h"
 
 @implementation AppDelegate
 
@@ -18,8 +19,14 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [_portChooser removeAllItems];
-    SerialManager *mngr = [[SerialManager alloc] init];
-    [_portChooser addItemsWithTitles: [mngr getSerialPorts]];
+    // get an port enumerator
+	NSEnumerator *enumerator = [AMSerialPortList portEnumerator];
+	AMSerialPort *aPort;
+	while (aPort = [enumerator nextObject]) {
+		// print port name
+        [_portChooser addItemWithTitle: [aPort name]];
+	}
+    
 }
 
 - (IBAction)quitButtonPressed:(id)sender {

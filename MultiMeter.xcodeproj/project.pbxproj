@@ -17,8 +17,11 @@
 		72299B4314D31CB10055DCB6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72299B2314D31CB10055DCB6 /* Cocoa.framework */; };
 		72299B4B14D31CB20055DCB6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72299B4914D31CB20055DCB6 /* InfoPlist.strings */; };
 		72299B4E14D31CB20055DCB6 /* MultiMeterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */; };
-		723DCC5514DEC95600C8C059 /* SerialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 723DCC5414DEC95600C8C059 /* SerialManager.m */; };
 		7244B05414E079CA001869A8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7244B05314E079CA001869A8 /* IOKit.framework */; };
+		72C5FEC114E1A212005B34AD /* AMSerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5FEB614E1A212005B34AD /* AMSerialPort.m */; };
+		72C5FEC314E1A212005B34AD /* AMSerialPortAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5FEBA14E1A212005B34AD /* AMSerialPortAdditions.m */; };
+		72C5FEC414E1A212005B34AD /* AMSerialPortList.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5FEBC14E1A212005B34AD /* AMSerialPortList.m */; };
+		72C5FEC614E1A212005B34AD /* AMStandardEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5FEC014E1A212005B34AD /* AMStandardEnumerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +54,17 @@
 		72299B4A14D31CB20055DCB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		72299B4C14D31CB20055DCB6 /* MultiMeterTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiMeterTests.h; sourceTree = "<group>"; };
 		72299B4D14D31CB20055DCB6 /* MultiMeterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiMeterTests.m; sourceTree = "<group>"; };
-		723DCC5314DEC95600C8C059 /* SerialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialManager.h; sourceTree = "<group>"; };
-		723DCC5414DEC95600C8C059 /* SerialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerialManager.m; sourceTree = "<group>"; };
 		7244B05314E079CA001869A8 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../../System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
+		72C5FEB314E1A212005B34AD /* AMSDKCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSDKCompatibility.h; sourceTree = "<group>"; };
+		72C5FEB414E1A212005B34AD /* AMSerialErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialErrors.h; sourceTree = "<group>"; };
+		72C5FEB514E1A212005B34AD /* AMSerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPort.h; sourceTree = "<group>"; };
+		72C5FEB614E1A212005B34AD /* AMSerialPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPort.m; sourceTree = "<group>"; };
+		72C5FEB914E1A212005B34AD /* AMSerialPortAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPortAdditions.h; sourceTree = "<group>"; };
+		72C5FEBA14E1A212005B34AD /* AMSerialPortAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortAdditions.m; sourceTree = "<group>"; };
+		72C5FEBB14E1A212005B34AD /* AMSerialPortList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSerialPortList.h; sourceTree = "<group>"; };
+		72C5FEBC14E1A212005B34AD /* AMSerialPortList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSerialPortList.m; sourceTree = "<group>"; };
+		72C5FEBF14E1A212005B34AD /* AMStandardEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMStandardEnumerator.h; sourceTree = "<group>"; };
+		72C5FEC014E1A212005B34AD /* AMStandardEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMStandardEnumerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +132,7 @@
 		72299B2914D31CB10055DCB6 /* MultiMeter */ = {
 			isa = PBXGroup;
 			children = (
-				723DCC5314DEC95600C8C059 /* SerialManager.h */,
-				723DCC5414DEC95600C8C059 /* SerialManager.m */,
+				72C5FEB214E1A212005B34AD /* SharedCode */,
 				72299B3514D31CB10055DCB6 /* AppDelegate.h */,
 				72299B3614D31CB10055DCB6 /* AppDelegate.m */,
 				72299B3814D31CB10055DCB6 /* MainMenu.xib */,
@@ -160,6 +170,23 @@
 				72299B4914D31CB20055DCB6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		72C5FEB214E1A212005B34AD /* SharedCode */ = {
+			isa = PBXGroup;
+			children = (
+				72C5FEB314E1A212005B34AD /* AMSDKCompatibility.h */,
+				72C5FEB414E1A212005B34AD /* AMSerialErrors.h */,
+				72C5FEB514E1A212005B34AD /* AMSerialPort.h */,
+				72C5FEB614E1A212005B34AD /* AMSerialPort.m */,
+				72C5FEB914E1A212005B34AD /* AMSerialPortAdditions.h */,
+				72C5FEBA14E1A212005B34AD /* AMSerialPortAdditions.m */,
+				72C5FEBB14E1A212005B34AD /* AMSerialPortList.h */,
+				72C5FEBC14E1A212005B34AD /* AMSerialPortList.m */,
+				72C5FEBF14E1A212005B34AD /* AMStandardEnumerator.h */,
+				72C5FEC014E1A212005B34AD /* AMStandardEnumerator.m */,
+			);
+			path = SharedCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +298,10 @@
 			files = (
 				72299B3014D31CB10055DCB6 /* main.m in Sources */,
 				72299B3714D31CB10055DCB6 /* AppDelegate.m in Sources */,
-				723DCC5514DEC95600C8C059 /* SerialManager.m in Sources */,
+				72C5FEC114E1A212005B34AD /* AMSerialPort.m in Sources */,
+				72C5FEC314E1A212005B34AD /* AMSerialPortAdditions.m in Sources */,
+				72C5FEC414E1A212005B34AD /* AMSerialPortList.m in Sources */,
+				72C5FEC614E1A212005B34AD /* AMStandardEnumerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

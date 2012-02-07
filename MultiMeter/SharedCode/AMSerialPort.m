@@ -2,7 +2,7 @@
 //  AMSerialPort.m
 //
 //  Created by Andreas on 2002-04-24.
-//  Copyright (c) 2001-2011 Andreas Mayer. All rights reserved.
+//  Copyright (c) 2001-2009 Andreas Mayer. All rights reserved.
 //
 //  2002-09-18 Andreas Mayer
 //  - added available & owner
@@ -63,12 +63,12 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 		bsdPath = [path copy];
 		serviceName = [name copy];
 		serviceType = [type copy];
-		optionsDictionary = [[NSMutableDictionary dictionaryWithCapacity:8] retain];
+		optionsDictionary = [NSMutableDictionary dictionaryWithCapacity:8];
 #ifndef __OBJC_GC__
-		options = (struct termios* __strong)malloc(sizeof(*options));
-		originalOptions = (struct termios* __strong)malloc(sizeof(*originalOptions));
-		buffer = (char* __strong)malloc(AMSER_MAXBUFSIZE);
-		readfds = (fd_set* __strong)malloc(sizeof(*readfds));
+		options = (struct termios*)malloc(sizeof(*options));
+		originalOptions = (struct termios*)malloc(sizeof(*originalOptions));
+		buffer = (char*)malloc(AMSER_MAXBUFSIZE);
+		readfds = (fd_set*)malloc(sizeof(*readfds));
 #else
 		options = (struct termios* __strong)NSAllocateCollectable(sizeof(*options), 0);
 		originalOptions = (struct termios* __strong)NSAllocateCollectable(sizeof(*originalOptions), 0);
@@ -104,20 +104,19 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 		NSLog(@"It is a programmer error to have not called -close on an AMSerialPort you have opened");
 #endif
 	
-	[readLock release]; readLock = nil;
-	[writeLock release]; writeLock = nil;
-	[closeLock release]; closeLock = nil;
-	[am_readTarget release]; am_readTarget = nil;
+	readLock = nil;
+	writeLock = nil;
+	closeLock = nil;
+	am_readTarget = nil;
 	
 	free(readfds); readfds = NULL;
 	free(buffer); buffer = NULL;
 	free(originalOptions); originalOptions = NULL;
 	free(options); options = NULL;
-	[optionsDictionary release]; optionsDictionary = nil;
-	[serviceName release]; serviceName = nil;
-	[serviceType release]; serviceType = nil;
-	[bsdPath release]; bsdPath = nil;
-	[super dealloc];
+	optionsDictionary = nil;
+	serviceName = nil;
+	serviceType = nil;
+	bsdPath = nil;
 }
 
 #else
@@ -166,8 +165,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 	
 	if (newDelegate != delegate) {
 		old = delegate;
-		delegate = [newDelegate retain];
-		[old release];
+		delegate = newDelegate;
 		delegateHandlesReadInBackground = [delegate respondsToSelector:@selector(serialPortReadData:)];
 		delegateHandlesWriteInBackground = [delegate respondsToSelector:@selector(serialPortWriteProgress:)];
 	}
@@ -197,7 +195,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 	io_service_t serialService;
 	
 	matchingDictionary = IOServiceMatching(kIOSerialBSDServiceValue);
-	CFDictionarySetValue(matchingDictionary, CFSTR(kIOTTYDeviceKey), (CFStringRef)[self name]);
+	CFDictionarySetValue(matchingDictionary, CFSTR(kIOTTYDeviceKey), (__bridge CFStringRef)[self name]);
 	if (matchingDictionary != NULL) {
 		CFRetain(matchingDictionary);
 		// This function decrements the refcount of the dictionary passed it
@@ -207,7 +205,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 			CFMutableDictionaryRef propertiesDict = NULL;
 			kernResult = IORegistryEntryCreateCFProperties(serialService, &propertiesDict, kCFAllocatorDefault, 0);
 			if (kernResult == KERN_SUCCESS) {
-				result = [[(NSDictionary*)propertiesDict copy] autorelease];
+				result = [(__bridge NSDictionary*)propertiesDict copy];
 			}
 			if (propertiesDict) {
 				CFRelease(propertiesDict);
@@ -265,7 +263,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 {
 	NSFileHandle *result = nil;
 	
-	__strong const char *path = [bsdPath fileSystemRepresentation];
+	const char *path = [bsdPath fileSystemRepresentation];
 	fileDescriptor = open(path, flags);
 
 #ifdef AMSerialDebug
@@ -345,8 +343,6 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 		// Disallows further access to the communications channel
 		[fileHandle closeFile];
 
-		// Release the fileHandle
-		[fileHandle release];
 		fileHandle = nil;
 		
 #ifdef AMSerialDebug
@@ -507,12 +503,12 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 }
 
 
-- (unsigned long)speed
+- (long)speed
 {
 	return cfgetospeed(options);	// we should support cfgetispeed too
 }
 
-- (BOOL)setSpeed:(unsigned long)speed
+- (BOOL)setSpeed:(long)speed
 {
 	BOOL result = YES;
 	// we should support setting input and output speed separately
@@ -640,7 +636,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)RTSInputFlowControl
 {
-	return (options->c_cflag & CRTS_IFLOW) != 0;
+	return (options->c_cflag & CRTS_IFLOW);
 }
 
 - (void)setRTSInputFlowControl:(BOOL)rts
@@ -654,7 +650,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)DTRInputFlowControl
 {
-	return (options->c_cflag & CDTR_IFLOW) != 0;
+	return (options->c_cflag & CDTR_IFLOW);
 }
 
 - (void)setDTRInputFlowControl:(BOOL)dtr
@@ -668,7 +664,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)CTSOutputFlowControl
 {
-	return (options->c_cflag & CCTS_OFLOW) != 0;
+	return (options->c_cflag & CCTS_OFLOW);
 }
 
 - (void)setCTSOutputFlowControl:(BOOL)cts
@@ -682,7 +678,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)DSROutputFlowControl
 {
-	return (options->c_cflag & CDSR_OFLOW) != 0;
+	return (options->c_cflag & CDSR_OFLOW);
 }
 
 - (void)setDSROutputFlowControl:(BOOL)dsr
@@ -696,7 +692,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)CAROutputFlowControl
 {
-	return (options->c_cflag & CCAR_OFLOW) != 0;
+	return (options->c_cflag & CCAR_OFLOW);
 }
 
 - (void)setCAROutputFlowControl:(BOOL)car
@@ -710,7 +706,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)hangupOnClose
 {
-	return (options->c_cflag & HUPCL) != 0;
+	return (options->c_cflag & HUPCL);
 }
 
 - (void)setHangupOnClose:(BOOL)hangup
@@ -723,7 +719,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)localMode
 {
-	return (options->c_cflag & CLOCAL) != 0;
+	return (options->c_cflag & CLOCAL);
 }
 
 - (void)setLocalMode:(BOOL)local
@@ -737,7 +733,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 
 - (BOOL)canonicalMode
 {
-	return (options->c_lflag & ICANON) != 0;
+	return (options->c_lflag & ICANON);
 }
 
 - (void)setCanonicalMode:(BOOL)flag
