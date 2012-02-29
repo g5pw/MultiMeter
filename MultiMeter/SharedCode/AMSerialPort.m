@@ -59,43 +59,35 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 	// path is a bsdPath
 	// name is an IOKit service name
 {
-	if ((self = [super init])) {
-		bsdPath = [path copy];
-		serviceName = [name copy];
-		serviceType = [type copy];
-		optionsDictionary = [NSMutableDictionary dictionaryWithCapacity:8];
-#ifndef __OBJC_GC__
-		options = (struct termios*)malloc(sizeof(*options));
-		originalOptions = (struct termios*)malloc(sizeof(*originalOptions));
-		buffer = (char*)malloc(AMSER_MAXBUFSIZE);
-		readfds = (fd_set*)malloc(sizeof(*readfds));
-#else
-		options = (struct termios* __strong)NSAllocateCollectable(sizeof(*options), 0);
-		originalOptions = (struct termios* __strong)NSAllocateCollectable(sizeof(*originalOptions), 0);
-		buffer = (char* __strong)NSAllocateCollectable(AMSER_MAXBUFSIZE, 0);
-		readfds = (fd_set* __strong)NSAllocateCollectable(sizeof(*readfds), 0);
-#endif
-		fileDescriptor = -1;
-		
-		writeLock = [[NSLock alloc] init];
-		readLock = [[NSLock alloc] init];
-		closeLock = [[NSLock alloc] init];
-		
-		// By default blocking read attempts will timeout after 1 second
-		[self setReadTimeout:1.0];
-		
-		// These are used by the AMSerialPortAdditions category only; pretend to use them here to silence warnings by the clang static analyzer.
-		(void)am_readTarget;
-		(void)am_readSelector;
-		(void)stopWriteInBackground;
-		(void)countWriteInBackgroundThreads;
-		(void)stopReadInBackground;
-		(void)countReadInBackgroundThreads;
-	}
+	self = [super init];
+    bsdPath = [path copy];
+    serviceName = [name copy];
+    serviceType = [type copy];
+    optionsDictionary = [NSMutableDictionary dictionaryWithCapacity:8];
+
+    options = (struct termios*)malloc(sizeof(*options));
+    originalOptions = (struct termios*)malloc(sizeof(*originalOptions));
+    buffer = (char*)malloc(AMSER_MAXBUFSIZE);
+    readfds = (fd_set*)malloc(sizeof(*readfds));
+
+    fileDescriptor = -1;
+    
+    writeLock = [[NSLock alloc] init];
+    readLock = [[NSLock alloc] init];
+    closeLock = [[NSLock alloc] init];
+    
+    // By default blocking read attempts will timeout after 1 second
+    [self setReadTimeout:1.0];
+    
+    // These are used by the AMSerialPortAdditions category only; pretend to use them here to silence warnings by the clang static analyzer.
+    //(void)am_readTarget;
+    //(void)am_readSelector;
+    //(void)stopWriteInBackground;
+    //(void)countWriteInBackgroundThreads;
+    //(void)stopReadInBackground;
+    //(void)countReadInBackgroundThreads;
 	return self;
 }
-
-#ifndef __OBJC_GC__
 
 - (void)dealloc
 {
@@ -104,35 +96,11 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 		NSLog(@"It is a programmer error to have not called -close on an AMSerialPort you have opened");
 #endif
 	
-	readLock = nil;
-	writeLock = nil;
-	closeLock = nil;
-	am_readTarget = nil;
-	
-	free(readfds); readfds = NULL;
-	free(buffer); buffer = NULL;
-	free(originalOptions); originalOptions = NULL;
-	free(options); options = NULL;
-	optionsDictionary = nil;
-	serviceName = nil;
-	serviceType = nil;
-	bsdPath = nil;
+	free(readfds);
+	free(buffer);
+	free(originalOptions);
+	free(options);
 }
-
-#else
-
-- (void)finalize
-{
-#ifdef AMSerialDebug
-	if (fileDescriptor != -1)
-		NSLog(@"It is a programmer error to have not called -close on an AMSerialPort you have opened");
-#endif
-	assert (fileDescriptor == -1);
-
-	[super finalize];
-}
-
-#endif
 
 // So NSLog and gdb's 'po' command give something useful
 - (NSString *)description
@@ -205,7 +173,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 			CFMutableDictionaryRef propertiesDict = NULL;
 			kernResult = IORegistryEntryCreateCFProperties(serialService, &propertiesDict, kCFAllocatorDefault, 0);
 			if (kernResult == KERN_SUCCESS) {
-				result = [(__bridge NSDictionary*)propertiesDict copy];
+				result = [(__bridge_transfer NSDictionary*)propertiesDict copy];
 			}
 			if (propertiesDict) {
 				CFRelease(propertiesDict);
@@ -497,7 +465,7 @@ NSString *const AMSerialErrorDomain = @"de.harmless.AMSerial.ErrorDomain";
 		[self commitChanges];
 	} else {
 #ifdef AMSerialDebug
-		NSLog(@"Error setting options for port %s (wrong port name: %s).\n", [self name], [newOptions objectForKey:AMSerialOptionServiceName]);
+		NSLog(@"Error setting options for port %@ (wrong port name: %@).\n", [[self name] UTF8String], [[newOptions objectForKey:AMSerialOptionServiceName] UTF8String]);
 #endif
 	}
 }

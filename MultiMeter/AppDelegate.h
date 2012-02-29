@@ -7,13 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MMPacket.h"
+#import "AMSerialPort.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+@property (weak) IBOutlet NSButton *stopButton;
 
 @property (weak) IBOutlet NSPopUpButton *portChooser;
 @property (assign) IBOutlet NSWindow *window;
-@property (weak) IBOutlet NSTextFieldCell *measurement;
-- (IBAction)quitButtonPressed:(id)sender;
-- (IBAction)portChooserPressed:(id)sender;
+@property (weak) IBOutlet NSTextField *display;
+@property AMSerialPort *active;
+@property BOOL running;
 
+- (IBAction)portChooserPressed:(id)sender;
+- (IBAction)stopAcquisitionRequested:(id)sender;
+- (void) displayMeasure:(MMPacket *) packet;
 @end

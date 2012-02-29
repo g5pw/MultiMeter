@@ -311,8 +311,10 @@
 	fd_set *localReadFDs = NULL;
 
 	[readLock lock];	// read in sequence
-	//NSLog(@"readDataInBackgroundThread - [readLock lock]");
-
+#ifdef AMSerialDebug
+	NSLog(@"readDataInBackgroundThread - [readLock lock]");
+#endif
+    
 	localBuffer = malloc(AMSER_MAXBUFSIZE);
 	stopReadInBackground = NO;
 	[closeLock lock];
@@ -517,7 +519,7 @@
 			timeout.tv_sec = (time_t)lrint(numSecs);
 			timeout.tv_usec = (suseconds_t)lrint(numUSecs);
 #ifdef AMSerialDebug
-			NSLog(@"timeout: %fs = %ds and %dus", remainingTimeout, timeout.tv_sec, timeout.tv_usec);
+			NSLog(@"timeout: %fs = %lds and %dus", remainingTimeout, timeout.tv_sec, timeout.tv_usec);
 #endif
 			
 			// If the remaining time is so small that it has rounded to zero, bump it up to 1 microsec.
