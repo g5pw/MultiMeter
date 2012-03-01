@@ -12,11 +12,12 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 @property (weak) IBOutlet NSButton *stopButton;
+@property (weak) IBOutlet NSProgressIndicator *spinIndicator;
 
 @property (weak) IBOutlet NSPopUpButton *portChooser;
-@property (assign) IBOutlet NSWindow *window;
+@property (unsafe_unretained) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTextField *display;
-@property AMSerialPort *active;
+@property (weak) AMSerialPort *active;
 @property BOOL running;
 
 - (IBAction)portChooserPressed:(id)sender;

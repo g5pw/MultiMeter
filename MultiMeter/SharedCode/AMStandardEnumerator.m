@@ -33,7 +33,7 @@
 
 - (void)dealloc
 {
-	collection = nil;
+	 collection = nil;
 }
 
 #endif

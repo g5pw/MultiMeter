@@ -17,6 +17,7 @@
 @implementation AppDelegate
 
 @synthesize stopButton = _stopButton;
+@synthesize spinIndicator = _spinIndicator;
 @synthesize portChooser = _portChooser;
 @synthesize window = _window;
 @synthesize display = _display;
@@ -47,6 +48,7 @@
     NSLog(@"port chooser selected %@", [active name]);
     [_stopButton setEnabled:true];
     [self setRunning:true];
+    [_spinIndicator startAnimation:self];
     [NSThread detachNewThreadSelector:@selector(readData) toTarget:self withObject:nil];
     
     
@@ -55,6 +57,7 @@
 - (IBAction)stopAcquisitionRequested:(id)sender {
     [self setRunning:false];
     [_stopButton setEnabled:false];
+    [_spinIndicator stopAnimation: self];
 }
 
 - (void) readData
@@ -63,14 +66,17 @@
     NSError *error;
     [active openExclusively];
     [active setSpeed:B19200];
-    [active setStopBits:kAMSerialStopBitsOne];
     [active setDataBits:7];
+    [active setStopBits:kAMSerialStopBitsOne];
     [active setParity:kAMSerialParityOdd];
+    BOOL res = [active commitChanges];
+    NSLog(@"Response: %d, last error: %s", res, strerror([active errorCode]));
     /* Read 14 bytes or up to a newline character (unfortunately the first bit is
      always one due to an error in the rs232 to usb converter */
     while (running) {
         NSLog(@"Reading 14 bytes");
-        NSData *data = [active readBytes:14 error: &error];
+        NSData *data = [active readBytes:14 upToChar: 0x0A error: &error];
+        [[[error userInfo] objectForKey: @"endCode"] intValue];
         if ([error code] != kAMSerialErrorNone) {
             NSLog(@"Error received: %@", error);
             continue;
